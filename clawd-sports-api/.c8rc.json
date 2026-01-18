@@ -1,0 +1,12 @@
+{
+  "include": ["src/**/*.js"],
+  "exclude": ["tests/**/*.js"],
+  "reporter": ["text", "html", "json"],
+  "output": "coverage",
+  "threshold": 55,
+  "check-coverage": true,
+  "lines": 55,
+  "functions": 40,
+  "branches": 65,
+  "statements": 55
+}

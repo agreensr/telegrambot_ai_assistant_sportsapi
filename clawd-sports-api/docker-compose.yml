@@ -1,0 +1,56 @@
+# Sports Data Service Docker Compose
+# Run with: docker compose up -d
+
+services:
+  # Redis cache
+  redis:
+    image: redis:7.2-alpine
+    container_name: clawd-sports-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - clawd-sports-network
+
+  # Sports Data API
+  sports-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clawd-sports-api
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - THE_ODDS_API_KEY=${THE_ODDS_API_KEY}
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - clawd-sports-network
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  clawd-sports-network:
+    driver: bridge

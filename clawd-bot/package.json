@@ -1,0 +1,37 @@
+{
+  "name": "clawd-bot",
+  "version": "1.0.0",
+  "description": "Context-aware AI Telegram bot with time-based LLM switching and sports data integration",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/**/*.test.js",
+    "test:watch": "node --test --watch tests/**/*.test.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "ai",
+    "llm",
+    "openrouter",
+    "sports"
+  ],
+  "author": "seangreen",
+  "license": "MIT",
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "axios": "^1.6.0",
+    "sqlite3": "^5.1.7",
+    "dotenv": "^16.3.0",
+    "winston": "^3.11.0",
+    "better-sqlite3": "^9.2.2"
+  },
+  "devDependencies": {
+    "c8": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
