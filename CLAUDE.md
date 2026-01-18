@@ -192,9 +192,9 @@ GET /api/sportsbooks           # Available sportsbooks
 
 **Required:**
 ```bash
-SUPABASE_URL=https://supabase.seangreen.cc
+SUPABASE_URL="URL"
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGc...  # Admin access (bypasses RLS)
-THE_ODDS_API_KEY=ab80e8f3f5eebd1bfc954142401c6ed9
+THE_ODDS_API_KEY="API_KEY"
 ```
 
 **Optional:**
